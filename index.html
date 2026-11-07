@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Permutaciones</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <h1>Permutaciones</h1>
+  <p>Lineal, circular y con repetición.</p>
+</header>
+
+<main>
+  <section>
+    <h2>Calculadora</h2>
+
+    <label for="operacion">Operación</label>
+    <select id="operacion">
+      <option value="factorial">Permutación de n elementos</option>
+      <option value="permSin" selected>Permutación lineal sin repetición</option>
+      <option value="permCirc">Permutación circular</option>
+      <option value="permRep">Permutación con repetición</option>
+    </select>
+
+    <div class="formula" id="formula-op"></div>
+
+    <div class="fila" id="campos-nr">
+      <div id="caja-n">
+        <label for="n">n (total de elementos)</label>
+        <input id="n" type="number" min="0" step="1">
+      </div>
+      <div id="caja-r">
+        <label for="r">r (elementos tomados)</label>
+        <input id="r" type="number" min="0" step="1">
+      </div>
+    </div>
+
+    <div id="caja-grupos" class="hidden">
+      <label for="grupos">Repeticiones de cada elemento (separadas por coma)</label>
+      <input id="grupos" type="text" placeholder="Ejemplo: 1,4,4,2">
+      <p class="ayuda">MISSISSIPPI: M=1, I=4, S=4, P=2 → escribe 1,4,4,2. El total n es la suma.</p>
+    </div>
+
+    <div id="resultado" class="hidden" role="status" aria-live="polite"></div>
+  </section>
+
+  <section>
+    <h2>Casos de prueba</h2>
+    <p class="ayuda">Elige la operación, escribe los datos y el resultado esperado. En la columna «r o grupos» escribe r, o los grupos separados por coma para permutación con repetición (ej. 1,4,4,2). Para un caso inválido, escribe ERROR como esperado.</p>
+
+    <div class="tabla-wrap">
+      <table id="tabla-pruebas">
+        <thead>
+          <tr><th>Operación</th><th>n</th><th>r o grupos</th><th>Esperado</th><th>Obtenido</th><th>Estado</th><th></th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <p id="resumen-pruebas"></p>
+    <button id="btn-agregar" type="button" class="sec">Agregar caso</button>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

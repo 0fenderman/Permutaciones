@@ -1,0 +1,171 @@
+
+Skip to main content
+
+Auto
+
+
+
+
+
+crea un programa html que pida texto en base 64 y lo transforme a image
+Aquí tienes un programa HTML completo que recibe un texto en Base64, lo convierte en imagen y la muestra en la página:
+
+
+
+
+Si quieres que detecte automáticamente PNG, JPG, GIF, WEBP o SVG sin tener que especificarlo, usa esta versión de la función:
+
+
+
+function mostrarImagen() {
+    const texto = document.getElementById("base64").value.trim();
+    const img = document.getElementById("imagen");
+ 
+    if (!texto) {
+        alert("Introduce un Base64 válido.");
+        return;
+    }
+ 
+    if (texto.startsWith("data:")) {
+        img.src = texto;
+    } else {
+        img.src = "data:image/*;base64," + texto;
+    }
+}
+Esta solución funciona con cadenas Base64 obtenidas de imágenes PNG, JPG, GIF, WEBP y otros formatos compatibles con el navegador.
+
+
+
+
+
+
+en tiempo real
+Si lo quieres en tiempo real, la imagen se actualizará automáticamente mientras escribes o pegas el Base64, sin necesidad de pulsar ningún botón:
+
+
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Base64 a Imagen en Tiempo Real</title>
+ 
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        margin:20px;
+    }
+ 
+    textarea{
+        width:100%;
+        height:200px;
+        padding:10px;
+        box-sizing:border-box;
+    }
+ 
+    #estado{
+        margin:10px 0;
+        color:#666;
+    }
+ 
+    img{
+        max-width:100%;
+        max-height:500px;
+        border:1px solid #ccc;
+        display:none;
+    }
+ 
+    .error{
+        color:red;
+    }
+</style>
+</head>
+<body>
+ 
+<h2>Base64 → Imagen (Tiempo Real)</h2>
+ 
+<textarea
+    id="base64"
+    placeholder="Pega aquí el Base64 de una imagen..."
+></textarea>
+ 
+<div id="estado">Esperando datos...</div>
+ 
+<img id="imagen" alt="Vista previa">
+ 
+<script>
+const textarea = document.getElementById("base64");
+const imagen = document.getElementById("imagen");
+const estado = document.getElementById("estado");
+ 
+textarea.addEventListener("input", actualizarImagen);
+ 
+function actualizarImagen() {
+ 
+    let base64 = textarea.value.trim();
+ 
+    if (!base64) {
+        imagen.style.display = "none";
+        estado.textContent = "Esperando datos...";
+        estado.className = "";
+        return;
+    }
+ 
+    try {
+ 
+        if (!base64.startsWith("data:")) {
+            base64 = "data:image/png;base64," + base64;
+        }
+ 
+        imagen.onload = () => {
+            estado.textContent = "✅ Imagen cargada";
+            estado.className = "";
+            imagen.style.display = "block";
+        };
+ 
+        imagen.onerror = () => {
+            estado.textContent = "❌ Base64 inválido";
+            estado.className = "error";
+            imagen.style.display = "none";
+        };
+ 
+        imagen.src = base64;
+ 
+    } catch (e) {
+        estado.textContent = "❌ Error al procesar";
+        estado.className = "error";
+        imagen.style.display = "none";
+    }
+}
+</script>
+ 
+</body>
+</html>
+Console
+
+
+
+Vista previa actual
+Detenida
+cannot fetch resource: , status: 0
+El contenido de la consola puede ser incorrecto
+Esta versión muestra la imagen instantáneamente conforme pegas o editas el texto Base64. También avisa si el contenido no corresponde a una imagen válida.
+
+
+
+
+
+
+Añade detección automática del formato
+
+Incluye un botón para descargar la imagen
+
+Agrega arrastrar y soltar archivos
+
+
+
+Enviar un mensaje a Copilot
+
+Copilot is an AI and may make mistakes.
